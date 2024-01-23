@@ -380,23 +380,16 @@ function getSpiralMatrix(size) {
  *  ]                 ]
  */
 function rotateMatrix(matrix) {
-  const newMatrix = [];
+  const newMatrix = matrix;
+  const deepCopy = JSON.parse(JSON.stringify(matrix));
   const size = matrix.length;
-  for (let i = 0; i < size; i += 1) {
-    const newRow = [];
-    for (let j = 0; j < size; j += 1) {
-      newRow[j] = 0;
-    }
-    newMatrix[i] = newRow;
-  }
 
   for (let row = 0; row < size; row += 1) {
-    // Rows
     for (let col = 0; col < size; col += 1) {
-      newMatrix[col][size - row - 1] = matrix[row][col];
+      newMatrix[col][size - row - 1] = deepCopy[row][col];
     }
   }
-  return newMatrix;
+  return matrix;
 }
 
 /**
@@ -461,6 +454,7 @@ function sortByAsc(arr) {
  *  '012345', 3 => '024135' => '043215' => '031425'
  *  'qwerty', 3 => 'qetwry' => 'qtrewy' => 'qrwtey'
  */
+
 function shuffleChar(str, iterations) {
   if (str < 3) {
     return str;
